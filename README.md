@@ -1,3 +1,12 @@
+1. Подключить компонент App в index.js
+
+2. Вынести состояния и методы в компонент App
+
+3. Разделить компонент users на более мелкие
+
+4. Реализовать функцию добавления в закладки
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
