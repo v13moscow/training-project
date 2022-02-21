@@ -1,17 +1,22 @@
-import React from "react";
-import User from "./user";
+import React, { useState } from "react"
+import Pagination from "./pagination"
+import User from "./user"
+import { paginate } from "../utils/paginate"
+import PropTypes from "prop-types"
 
 const Users = ({ users, ...rest }) => {
-  // const renderPrase = (namber) => {
-  //   const lastOne = Number(namber.toString().slice(-1));
-  //   if (namber > 4 && namber < 14) return "человек тусанет ";
-  //   if ([2, 3, 4].indexOf(lastOne) >= 0) return "человека тусанет";
-  //   if (lastOne === 1) return "человек тусанет";
-  // };
+  const count = users.length
+  const pageSize = 4
+  const [carrentPage, setCarrentPage] = useState(1)
+  const handlePageChange = (pageIndex) => {
+    setCarrentPage(pageIndex)
+  }
+
+  const userGroup = paginate(users, carrentPage, pageSize)
+
   return (
     <>
-    
-      {users.length > 0 && (
+      {count > 0 && (
         <table className="table">
           <thead>
             <tr>
@@ -24,14 +29,23 @@ const Users = ({ users, ...rest }) => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
-              <User {...user} {...rest} />
+            {userGroup.map((user) => (
+              <User {...user} {...rest} key={user._id} />
             ))}
           </tbody>
         </table>
       )}
+      <Pagination
+        itemCount={count}
+        pageSize={pageSize}
+        onPageChange={handlePageChange}
+        carrentPage={carrentPage}
+      />
     </>
-  );
-};
+  )
+}
+Users.propTypes = {
+  users: PropTypes.array.isRequired,
+}
 
-export default Users;
+export default Users

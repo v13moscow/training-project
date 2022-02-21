@@ -1,6 +1,6 @@
-import React from "react";
-import Qualitie from './qualitie';
-import BookMark from './bookMark';
+import React from "react"
+import Qualitie from "./qualitie"
+import BookMark from "./bookMark"
 const User = ({
   _id,
   name,
@@ -10,24 +10,21 @@ const User = ({
   rate,
   onDelete,
   bookmark,
-  onToggleBookMark
+  onToggleBookMark,
 }) => {
   return (
     <tr key={_id}>
       <td>{name}</td>
       <td>
         {qualities.map((item) => (
-          <Qualitie {...item} />
+          <Qualitie {...item} key={item._id} />
         ))}
       </td>
       <td>{profession.name}</td>
       <td>{completedMeetings}</td>
       <td>{rate} /5</td>
       <td>
-        < BookMark 
-        status={bookmark}
-        onClick={() =>onToggleBookMark(_id)}
-        />
+        <BookMark status={bookmark} onClick={() => onToggleBookMark(_id)} />
       </td>
       <td>
         <button className="btn btn-danger" onClick={() => onDelete(_id)}>
@@ -35,7 +32,7 @@ const User = ({
         </button>
       </td>
     </tr>
-  );
-};
+  )
+}
 
-export default User;
+export default User
